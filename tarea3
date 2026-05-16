@@ -1,0 +1,16 @@
+class pagotarjeta:
+    def procesar_pago(self, monto):
+        print(f"tarjeta: ${monto}")
+
+class pagocriptomoneda:
+    def procesar_pago(self, monto):
+        print(f"cripto: ${monto}")
+
+def ejecutar_transaccion(objeto_pago, monto):
+    objeto_pago.procesar_pago(monto)  
+
+tarjeta = pagotarjeta()
+crypto = pagocriptomoneda()
+
+ejecutar_transaccion(tarjeta, 20)  
+ejecutar_transaccion(crypto, 0)  

@@ -1,0 +1,21 @@
+class vehiculo:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+class carro(vehiculo):
+    def __init__(self, marca, modelo, numero_puertas):
+        super().__init__(marca, modelo)
+        self.numero_puertas = numero_puertas
+
+class moto(vehiculo):
+    def __init__(self, marca, modelo, tipo_manillar):
+        super().__init__(marca, modelo)
+        self.tipo_manillar = tipo_manillar
+
+
+coche = carro("toyota", "corolla", 4)
+moto = moto("honda", "crb", "deportivo")
+
+print(f"carro: {coche.marca} {coche.modelo}, Puertas: {coche.numero_puertas}")
+print(f"moto: {moto.marca} {moto.modelo}, Manillar: {moto.tipo_manillar}")

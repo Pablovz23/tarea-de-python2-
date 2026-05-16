@@ -1,0 +1,21 @@
+class empleado:
+    def __init__(self, nombre, salario):
+        self._nombre = nombre  
+        self._salario = salario
+
+class desarrollador(empleado):
+    def calcular_pago(self): 
+        return self._salario + 200  
+
+class vendedor(empleado):
+    def calcular_pago(self): 
+        return self._salario + 500  
+
+empleados = [desarrollador("nirvana", 12000), vendedor("carlitoplay", 8000)]
+UMBRAL = 1000
+
+for e in empleados:
+    pago = e.calcular_pago()
+    if pago < UMBRAL:
+        pago *= 2.10 
+    print(f"{e._nombre}: ${pago:.2f}")

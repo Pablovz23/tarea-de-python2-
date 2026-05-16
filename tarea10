@@ -1,0 +1,97 @@
+from abc import ABC, abstractmethod
+import random
+
+
+def probabilidad_critico(funcion):
+
+    def envoltura(self, objetivo):
+
+        dano = funcion(self, objetivo)
+
+        critico = random.random() < 0.3
+
+        if critico:
+            dano *= 2
+            print("¡Golpe crítico!")
+
+        return dano
+
+    return envoltura
+
+
+class PersonajeBase(ABC):
+
+    def _init_(self, nombre, vida, ataque):
+        self._nombre = nombre
+        self._vida = vida
+        self._ataque = ataque
+
+    @abstractmethod
+    def atacar(self, objetivo):
+        pass
+
+    def recibir_dano(self, dano):
+        self._vida -= dano
+
+        if self._vida < 0:
+            self._vida = 0
+
+        print(f"{self._nombre} ahora tiene {self._vida} de vida")
+
+
+class Guerrero(PersonajeBase):
+
+    @probabilidad_critico
+    def atacar(self, objetivo):
+        dano = self._ataque + 10
+        objetivo.recibir_dano(dano)
+        return dano
+
+
+class Mago(PersonajeBase):
+
+    @probabilidad_critico
+    def atacar(self, objetivo):
+        dano = self._ataque + random.randint(5, 20)
+        objetivo.recibir_dano(dano)
+        return dano
+
+
+class FabricaPersonajes:
+
+    @staticmethod
+    def crear_personaje(tipo, nombre):
+
+        if tipo == "guerrero":
+            return Guerrero(nombre, 120, 20)
+
+        elif tipo == "mago":
+            return Mago(nombre, 80, 25)
+
+
+jugador1 = FabricaPersonajes.crear_personaje("guerrero", "Thor")
+jugador2 = FabricaPersonajes.crear_personaje("mago", "Merlin")
+
+turno = 1
+
+while jugador1._vida > 0 and jugador2._vida > 0:
+
+    print(f"\n--- Turno {turno} ---")
+
+    if turno % 2 == 1:
+        print(f"{jugador1._nombre} ataca")
+        jugador1.atacar(jugador2)
+
+    else:
+        print(f"{jugador2._nombre} ataca")
+        jugador2.atacar(jugador1)
+
+    turno += 1
+
+print("\n=== FIN DE LA BATALLA ===")
+
+if jugador1._vida > 0:
+    print(f"Ganó {jugador1._nombre}")
+
+else:
+    print(f"Ganó {jugador2._nombre}")

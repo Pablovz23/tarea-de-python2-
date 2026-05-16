@@ -1,0 +1,15 @@
+class configuracionGlobal:
+    __instancia = None
+
+    def _new_(cls):
+        if cls.__instancia is None:
+            cls._instancia = super().new_(cls)
+
+        return cls.__instancia
+    
+confi1 = configuracionGlobal() 
+confi2 = configuracionGlobal()
+
+print(confi1 is confi2)
+print(id(confi1))
+print(id(confi2))

@@ -1,0 +1,19 @@
+import time #time inporta tiempos osea dias meses años 
+
+def medir_tiempo_de_ejecucion(funcion):# funcion es generar una lista 
+    def envoltura():#ejecuta codigo pasando del antes, al original y el despues
+        inicio = time.time()# se agrupa el tiempo inicial 
+
+        funcion()#se ejecuta la funcion original
+
+        fin = time.time# tiempo final
+
+        print(f"tiempo de ejecision {fin - inicio} segundos") #calcula la direccion(fin - inicio)
+
+    return envoltura
+@medir_tiempo_de_ejecucion
+def generar_lista():
+    numeros = [x for x in range (1000000)]
+    return numeros 
+
+generar_lista()
